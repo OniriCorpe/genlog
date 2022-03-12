@@ -8,23 +8,23 @@ find "${PWD}" -wholename "*.gmi" -type f | while read gmi_file
 do
 
     # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
-    title=$("sed -n '1{s/# //p}' $gmi_file")
+    title="$(sed -n '1{s/# //p}' $gmi_file)"
 
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
     sed "s#<\!-- TITLE -->#$title#" "${PWD}"/html/header.html > "${PWD}"/temp/header.html
 
     # on génère la date et on la fout dans le footer
-    date=$("date")
+    date="$(date)"
     sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "${PWD}"/temp/footer.html
 
     # conversion du .gmi en .html
     gmnitohtml < $gmi_file > "${PWD}"/temp/body.html
 
     # on récupère juste le path du dossier qui contient le .gmi
-    path=$("dirname $gmi_file")
+    path="$(dirname $gmi_file)"
     # on récupère juste le nom du fichier .gmi sans son extenstion ".gmi"
-    filename=$("basename $gmi_file .gmi")
+    filename="$(basename $gmi_file .gmi)"
 
     # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
     cat "${PWD}"/temp/header.html "${PWD}"/temp/body.html "${PWD}"/temp/footer.html > $path/$filename.html
