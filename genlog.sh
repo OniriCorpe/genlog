@@ -23,9 +23,11 @@ do
 
     # on récupère juste le path du dossier qui contient le .gmi
     path=$(dirname $gmi_file)
+    # on récupère juste le nom du fichier .gmi sans son extenstion ".gmi"
+    filename=$(basename $gmi_file .gmi)
 
     # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
-    cat "${PWD}"/temp/header.html "${PWD}"/temp/body.html "${PWD}"/temp/footer.html > $path/index.html
+    cat "${PWD}"/temp/header.html "${PWD}"/temp/body.html "${PWD}"/temp/footer.html > $path/$filename.html
 
     # on nettoie le dossier de taff
     rm "${PWD}"/temp/*
