@@ -4,6 +4,8 @@ install [scdoc](https://git.sr.ht/~sircmpwn/scdoc) and [gmnitohtml](https://git.
 
 clone this repo
 
+``` chmod +x genlog.sh ```
+
 put your files in the "content" folder
 
 your .gmi files are converted in html and concatenated with the html/header.html and the html/footer.html  
