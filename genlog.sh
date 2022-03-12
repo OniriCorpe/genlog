@@ -28,7 +28,7 @@ do
     cat "${PWD}"/temp/header.html "${PWD}"/temp/body.html "${PWD}"/temp/footer.html > $path/index.html
 
     # on nettoie le dossier de taff
-    rm -r "${PWD}"/temp/*
+    rm "${PWD}"/temp/*
 
     # je crois c'est bon
     echo "OK: $gmi_file"
