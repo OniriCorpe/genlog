@@ -7,4 +7,17 @@ clone this repo
 put your files in the "content" folder
 
 your .gmi files are converted in html and concatenated with the html/header.html and the html/footer.html  
-the .html file is witen in the directory of the .gmi file
+the .html file is witen in the directory of the .gmi file which has been treated  
+this script will recursively search all .gmi files contained in the "content" folder, even in the other folders it includes
+
+feel free to customize the html/header.html and the html/footer.html as you like
+
+please keep the
+
+```HTML
+    <title>
+        <!-- TITLE -->
+    </title>
+```
+
+in the html/header.html file if you want your generated pages to have a properly defined title in the HTML
