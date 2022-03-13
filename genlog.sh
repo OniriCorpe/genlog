@@ -4,7 +4,7 @@
 mkdir "${PWD}"/temp/
 
 # on cherche récursivement tous les fichiers ".gmi" dans le dossier "content"
-find "${PWD}" -wholename "*.gmi" -type f | while read gmi_file
+find "${PWD}"/content -wholename "*.gmi" -type f | while read gmi_file
 do
 
     # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
