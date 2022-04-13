@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # on créé un répertoire de taff temporaire pour foutre nos fichiers en cours de traitement dedans
-mkdir "${PWD}"/temp/
+tempdir="$(mktemp -d)"
 
 # on cherche récursivement tous les fichiers ".gmi" dans le dossier "content"
 find "${PWD}"/content -wholename "*.gmi" -type f | while read gmi_file
@@ -12,14 +12,14 @@ do
 
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
-    sed "s#<\!-- TITLE -->#$title#" "${PWD}"/html/header.html > "${PWD}"/temp/header.html
+    sed "s#<\!-- TITLE -->#$title#" "${PWD}"/html/header.html > "$tempdir/header.html"
 
     # on génère la date et on la fout dans le footer
     date="$(date)"
-    sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "${PWD}"/temp/footer.html
+    sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "$tempdir/footer.html"
 
     # conversion du .gmi en .html
-    gmnitohtml < $gmi_file > "${PWD}"/temp/body.html
+    gmnitohtml < $gmi_file > "$tempdir/body.html"
 
     # on récupère juste le path du dossier qui contient le .gmi
     path="$(dirname $gmi_file)"
@@ -27,10 +27,10 @@ do
     filename="$(basename $gmi_file .gmi)"
 
     # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
-    cat "${PWD}"/temp/header.html "${PWD}"/temp/body.html "${PWD}"/temp/footer.html > $path/$filename.html
+    cat "$tempdir/header.html" "$tempdir/body.html" "$tempdir/footer.html" > $path/$filename.html
 
     # on nettoie le dossier de taff
-    rm "${PWD}"/temp/*
+    rm "$tempdir/*"
 
     # je crois c'est bon
     echo "OK: $gmi_file"
@@ -38,7 +38,7 @@ do
 done
 
 # on vire le dossier de taff devenu inutile
-rm -r "${PWD}"/temp/
+rm -rf "$tempdir"
 
 # cette fois c'est vraiment fini
 echo "Done."
