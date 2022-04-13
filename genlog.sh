@@ -4,11 +4,11 @@
 tempdir="$(mktemp -d)"
 
 # on cherche récursivement tous les fichiers ".gmi" dans le dossier "content"
-find "${PWD}"/content -wholename "*.gmi" -type f | while read gmi_file
+find "${PWD}"/content -wholename "*.gmi" -type f | while read -r gmi_file
 do
 
     # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
-    title="$(sed -n '1{s/# //p}' $gmi_file)"
+    title="$(sed -n '1{s/# //p}' "$gmi_file")"
 
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
@@ -19,15 +19,15 @@ do
     sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "$tempdir/footer.html"
 
     # conversion du .gmi en .html
-    gmnitohtml < $gmi_file > "$tempdir/body.html"
+    gmnitohtml < "$gmi_file" > "$tempdir/body.html"
 
     # on récupère juste le path du dossier qui contient le .gmi
-    path="$(dirname $gmi_file)"
+    path="$(dirname "$gmi_file")"
     # on récupère juste le nom du fichier .gmi sans son extenstion ".gmi"
-    filename="$(basename $gmi_file .gmi)"
+    filename="$(basename "$gmi_file" .gmi)"
 
     # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
-    cat "$tempdir/header.html" "$tempdir/body.html" "$tempdir/footer.html" > $path/$filename.html
+    cat "$tempdir/header.html" "$tempdir/body.html" "$tempdir/footer.html" > "$path/$filename.html"
 
     # on nettoie le dossier de taff
     rm "$tempdir/*"
