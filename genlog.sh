@@ -39,9 +39,6 @@ do
     # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
     cat "$tempdir/header.html" "$tempdir/body.html" "$tempdir/footer.html" > "$path/$filename.html"
 
-    # on nettoie le dossier de taff
-    rm "$tempdir/*"
-
     # je crois c'est bon
     echo "OK: $title"
     echo "⤷ $gmi_file"
@@ -49,7 +46,7 @@ do
 done
 
 # on vire le dossier de taff devenu inutile
-rm -rf "$tempdir"
+rmdir "$tempdir"
 
 # cette fois c'est vraiment fini
 echo "Done."
