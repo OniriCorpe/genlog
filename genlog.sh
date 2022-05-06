@@ -46,7 +46,7 @@ do
 done
 
 # on vire le dossier de taff devenu inutile
-rmdir "$tempdir"
+rm -r "$tempdir"
 
 # cette fois c'est vraiment fini
 echo "Done."
