@@ -3,6 +3,7 @@
 # on créé un répertoire de taff temporaire pour foutre nos fichiers en cours de traitement dedans
 tempdir="$(mktemp -d)"
 
+
 # on vérifie s'il y a un argument passé à notre script
 if [ -n "$1" ]
 then
@@ -12,6 +13,12 @@ else
     # sinon on utilise le dossier "content" à la racine de notre script
     source_path="${PWD}"/content
 fi
+
+
+# on génère la date et on la fout dans le footer
+date="$(date)"
+sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "$tempdir/footer.html"
+
 
 # on cherche récursivement tous les fichiers ".gmi" dans le dossier de taff
 find "$source_path" -wholename "*.gmi" -type f | while read -r gmi_file
@@ -23,10 +30,6 @@ do
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
     sed "s#<\!-- TITLE -->#$title#" "${PWD}"/html/header.html > "$tempdir/header.html"
-
-    # on génère la date et on la fout dans le footer
-    date="$(date)"
-    sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "$tempdir/footer.html"
 
     # conversion du .gmi en .html
     gmnitohtml < "$gmi_file" > "$tempdir/body.html"
@@ -45,8 +48,10 @@ do
 
 done
 
+
 # on vire le dossier de taff devenu inutile
 rm -r "$tempdir"
+
 
 # cette fois c'est vraiment fini
 echo "All done."
