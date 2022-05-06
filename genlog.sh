@@ -9,7 +9,7 @@ then
     # si oui, on l'utilise comme path ou aller taffer
     source_path="$1"
 else
-    # sinon on utilise le dossier "content"
+    # sinon on utilise le dossier "content" à la racine de notre script
     source_path="${PWD}"/content
 fi
 
