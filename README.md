@@ -24,14 +24,15 @@ in the html/header.html file if you want your generated pages to have a properly
 
 ## usage
 
-put your files in the "content" folder  
+put your files to be processed in the "content" folder then lauch the script  
 ``` ./genlog.sh ```
 
 or
 
+you can also put the path to your folder with the files to be processed as the first argument  
 ``` ./genlog.sh /path/to/your/choosen/folder ```
 
 or
 
-you can optionally add a text at the end of the HTML page title
+you can optionally add a text at the end of the HTML page title as the second argument  
 ```./genlog.sh /path/to/your/choosen/folder "Your custom title"```
