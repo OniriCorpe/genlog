@@ -41,7 +41,7 @@ do
 
     # je crois c'est bon
     echo "OK: $title"
-    echo "⤷ $gmi_file"
+    echo "    ⤷ $gmi_file"
 
 done
 
@@ -49,4 +49,4 @@ done
 rm -r "$tempdir"
 
 # cette fois c'est vraiment fini
-echo "Done."
+echo "All done."
