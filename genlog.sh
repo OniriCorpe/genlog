@@ -3,8 +3,18 @@
 # on créé un répertoire de taff temporaire pour foutre nos fichiers en cours de traitement dedans
 tempdir="$(mktemp -d)"
 
-# on cherche récursivement tous les fichiers ".gmi" dans le dossier "content"
-find "${PWD}"/content -wholename "*.gmi" -type f | while read -r gmi_file
+# on vérifie s'il y a un argument passé à notre script
+if "$1"
+then
+    # si oui, on l'utilise comme path ou aller taffer
+    source_path="$1"
+else
+    # sinon on utilise le dossier "content"
+    source_path="${PWD}"/content
+fi
+
+# on cherche récursivement tous les fichiers ".gmi" dans le dossier de taff
+find "$source_path" -wholename "*.gmi" -type f | while read -r gmi_file
 do
 
     # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
