@@ -25,7 +25,7 @@ find "$source_path" -wholename "*.gmi" -type f | while read -r gmi_file
 do
 
     # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
-    title="$(sed -n '1{s/# //p}' "$gmi_file")"
+    title="$(sed -n '1{s/# //p}' "$gmi_file") $2"
 
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"

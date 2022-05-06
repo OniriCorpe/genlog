@@ -30,3 +30,8 @@ put your files in the "content" folder
 or
 
 ``` ./genlog.sh /path/to/your/choosen/folder ```
+
+or
+
+you can optionally add a text at the end of the HTML page title
+```./genlog.sh /path/to/your/choosen/folder "Your custom title"```
