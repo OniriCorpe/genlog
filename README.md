@@ -24,7 +24,7 @@ in the html/header.html file if you want your generated pages to have a properly
 
 ## usage
 
-put your files in the "content" folder
+put your files in the "content" folder  
 ``` ./genlog.sh ```
 
 or
