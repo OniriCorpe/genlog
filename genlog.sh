@@ -43,7 +43,8 @@ do
     rm "$tempdir/*"
 
     # je crois c'est bon
-    echo "OK: $title -> $gmi_file"
+    echo "OK: $title"
+    echo "⤷ $gmi_file"
 
 done
 
