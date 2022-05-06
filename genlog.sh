@@ -4,7 +4,7 @@
 tempdir="$(mktemp -d)"
 
 # on vérifie s'il y a un argument passé à notre script
-if "$1"
+if [ -n "$1" ]
 then
     # si oui, on l'utilise comme path ou aller taffer
     source_path="$1"
