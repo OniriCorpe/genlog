@@ -11,13 +11,13 @@ then
     source_path="$1"
 else
     # sinon on utilise le dossier "content" à la racine de notre script
-    source_path="${PWD}"/content
+    source_path=content
 fi
 
 
 # on génère la date et on la fout dans le footer
 date="$(date)"
-sed "s/GEN_DATE/$date/" "${PWD}"/html/footer.html > "$tempdir/footer.html"
+sed "s/GEN_DATE/$date/" html/footer.html > "$tempdir/footer.html"
 
 
 # on cherche récursivement tous les fichiers ".gmi" dans le dossier de taff
@@ -29,7 +29,7 @@ do
 
     # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
     # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
-    sed "s#<\!-- TITLE -->#$title#" "${PWD}"/html/header.html > "$tempdir/header.html"
+    sed "s#<\!-- TITLE -->#$title#" html/header.html > "$tempdir/header.html"
 
     # conversion du .gmi en .html
     gmnitohtml < "$gmi_file" > "$tempdir/body.html"
