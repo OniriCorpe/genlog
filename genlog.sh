@@ -1,11 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# quelques trucs intelligents
+# https://sharats.me/posts/shell-script-best-practices/
+set -o errexit
+set -o nounset
+set -o pipefail
+
 
 # on créé un répertoire de taff temporaire pour foutre nos fichiers en cours de traitement dedans
 tempdir="$(mktemp -d)"
 
 
 # on vérifie s'il y a un argument passé à notre script
-if [ -n "$1" ]
+if [[ -n "$1" ]]
 then
     # si oui, on l'utilise comme path ou aller taffer
     source_path="$1"
