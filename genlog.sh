@@ -32,7 +32,7 @@ do
     sed "s#<\!-- TITLE -->#$title#" html/header.html > "$tempdir/header.html"
 
     # conversion du .gmi en .html
-    gmnitohtml < "$gmi_file" > "$tempdir/body.html"
+    /usr/local/bin/gmnitohtml < "$gmi_file" > "$tempdir/body.html"
 
     # on récupère juste le path du dossier qui contient le .gmi
     file_path="$(dirname "$gmi_file")"
