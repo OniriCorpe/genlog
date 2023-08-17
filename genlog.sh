@@ -1,63 +1,63 @@
 #!/usr/bin/env bash
 
-# quelques trucs intelligents
+# some useful things
 # https://sharats.me/posts/shell-script-best-practices/
 set -o errexit
 set -o pipefail
 
 
-# on créé un répertoire de taff temporaire pour foutre nos fichiers en cours de traitement dedans
+# creating a temporary directory for our working stuff
 tempdir="$(mktemp -d)"
 
 
-# on vérifie s'il y a un argument passé à notre script
+# checking args
 if [[ -n "$1" ]]
 then
-    # si oui, on l'utilise comme path ou aller taffer
+    # if there's an arg, using it as a working path
     source_path="$1"
 else
-    # sinon on utilise le dossier "content" à la racine de notre script
+    # if not, using the 'content' directory as working path
     source_path=content
 fi
 
 
-# on génère la date et on la fout dans le footer
+# generating the current date for the footer
 date="$(date)"
 sed "s/GEN_DATE/$date/" html/footer.html > "$tempdir/footer.html"
 
 
-# on cherche récursivement tous les fichiers ".gmi" dans le dossier de taff
+# finding recursively all ".gmi" files on the working path
 find "$source_path" -wholename "*.gmi" -type f | while read -r gmi_file
 do
 
-    # récupérer la 1ère ligne du fichier .gmi et remplacer "# " par ""
+    # deleting the '#' of the first line and save it as title
     title="$(sed -n '1{s/# //p}' "$gmi_file") $2"
 
-    # dans le header.html, remplacer "<\-- TITLE -->" par le titre récupéré
-    # puis enregistrer le fichier ainsi modifié dans "temp/header.html"
+    # in the header.html, replacing the "<\-- TITLE -->" by the previously
+    # saved title, and save the modified file in our temporary directory
     sed "s#<\!-- TITLE -->#$title#" html/header.html > "$tempdir/header.html"
 
-    # conversion du .gmi en .html
+    # convertig .gmi files in .html
     /usr/local/bin/gmnitohtml < "$gmi_file" > "$tempdir/body.html"
 
-    # on récupère juste le path du dossier qui contient le .gmi
+    # retrieving of the path of the current .gmi file
     file_path="$(dirname "$gmi_file")"
-    # on récupère juste le nom du fichier .gmi sans son extenstion ".gmi"
+    # retrieving of the filename of the current .gmi file, without its extension
     file_name="$(basename "$gmi_file" .gmi)"
 
-    # on assemble les 3 morceaux et on l'écrit dans le dossier du .gmi qui est traité
+    # assembling the header, the converted page and the footer and saving it in the working path
     cat "$tempdir/header.html" "$tempdir/body.html" "$tempdir/footer.html" > "$file_path/$file_name.html"
 
-    # je crois c'est bon
+    # i think it's all good
     echo "OK: $title"
     echo "    ⤷ $file_path/$file_name.html"
 
 done
 
 
-# on vire le dossier de taff devenu inutile
+# removing the temporary directory, it's useless now
 rm -r "$tempdir"
 
 
-# cette fois c'est vraiment fini
+# this time it's really the end
 echo "All done."
