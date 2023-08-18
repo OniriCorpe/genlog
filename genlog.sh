@@ -21,8 +21,8 @@ else
 fi
 
 
-# generating the current date for the footer
-date="$(date)"
+# get the current date for the footer (UTC and ISO 8601 with hours and minutes)
+date=$(date -u --iso-8601=minutes)
 sed "s/GEN_DATE/$date/" html/footer.html > "$tempdir/footer.html"
 
 
