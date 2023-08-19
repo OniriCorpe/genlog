@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+:' LICENCE
+THE "HOT CHOCOLATE LICENSE ☕" (HCL revision 1312.2):
+
+OniriCorpe wrote this file. As long as you retain this
+notice and you are an anarchist/communist who supports oppressed and
+marginalized groups (ie and not exclusively queer folks, BIPOC, intersex,
+disabled comrades, etc), you can do whatever you want with this stuff.
+If we meet some day, and you think this stuff is worth it, you can buy me a
+hot chocolate or any other non-alcoholic drink that suits me in return.
+
+OniriCorpe 🏴'
+
+
 # some useful things
 # https://sharats.me/posts/shell-script-best-practices/
 set -o errexit
