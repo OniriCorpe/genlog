@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-:' LICENCE
+: '
+LICENCE
 THE "HOT CHOCOLATE LICENSE ☕" (HCL revision 1312.2):
 
 OniriCorpe wrote this file. As long as you retain this
@@ -10,7 +11,8 @@ disabled comrades, etc), you can do whatever you want with this stuff.
 If we meet some day, and you think this stuff is worth it, you can buy me a
 hot chocolate or any other non-alcoholic drink that suits me in return.
 
-OniriCorpe 🏴'
+OniriCorpe 🏴
+'
 
 
 # some useful things
