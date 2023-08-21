@@ -10,22 +10,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 
     <style>
+        a {
+            color: var(--text-main);
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #9d9d9d;
+        }
+
         article a::before {
             content: "➤ ";
         }
 
         a[href^="//"]::before,
+        a[href^="//"]:hover {
+            color: #9211ce;
+        }
+
         a[href^="http"]::before,
-        a[href^="gemini"]::before {
-            content: "🌐 ";
+        a[href^="http"]:hover {
+            color: #006eff;
         }
 
-        a[href^="//"]::before {
-            filter: hue-rotate(90deg) saturate(2);
-        }
 
-        a[href^="gemini"]::before {
-            filter: hue-rotate(200deg) saturate(2);
+        a[href^="gemini"]::before,
+        a[href^="gemini"]:hover {
+            color: #ff5e00;
         }
 
         p {
