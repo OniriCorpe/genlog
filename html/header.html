@@ -22,10 +22,25 @@
             display: inline-block;
         }
 
+        p{
+            margin: 1em;
+        }
+
+        a::before, h1::before, h2::before, h3::before,
+        blockquote::before, .footer {
+            color: #505050
+    	    }
+
+        article a::before { content:"→ "; }
+        h1::before { content:"# "; }
+        h2::before { content:"## "; }
+        h3::before { content:"### "; }
+        blockquote::before { content:"> "; }
+
         blockquote {
             margin: 0 1em;
-            padding: .5em 1em;
-            border-left: 5px solid #505050;
+            padding: .5em .5em;
+            border-left: .2em solid #505050;
         }
 
         pre {
@@ -34,12 +49,11 @@
             white-space: pre-wrap;
             word-break: keep-all;
             margin: 0 1em;
-            padding-left: 1em;
+            padding-left: .7em;
         }
 
         .footer {
             padding: 2em 2em 0;
-            opacity: 0.8;
             text-align: center;
         }
     </style>
@@ -52,5 +66,6 @@
 
 <body>
 
-    <div class="container">
-        <!-- End header.html -->
+<div class="container">
+<article>
+<!-- End header.html -->
