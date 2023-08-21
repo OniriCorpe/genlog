@@ -10,30 +10,55 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 
     <style>
-        a[href^="//"]::after,
-        a[href^="http"]::after,
-        a[href^="gemini"]::after {
-            content: "";
-            width: 0.7em;
-            height: 0.7em;
-            margin-left: 0.3em;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
-            background-size: contain;
+        article a::before {
+            content: "➤";
             display: inline-block;
+            margin-right: .4em;
         }
 
-        p { margin: 1em; }
+        a[href^="//"]::before,
+        a[href^="http"]::before,
+        a[href^="gemini"]::before {
+            content: "🌐";
+            margin-right: .4em;
+        }
 
-        a::before, h1::before, h2::before, h3::before,
-        blockquote::before, .footer {
+        a[href^="//"]::before {
+            filter: hue-rotate(90deg) saturate(2);
+        }
+
+        a[href^="http"]::before {
+            filter: hue-rotate(200deg) saturate(2);
+        }
+
+        p {
+            margin: 1em;
+        }
+
+        a::before,
+        h1::before,
+        h2::before,
+        h3::before,
+        blockquote::before,
+        .footer {
             color: #9d9d9d;
         }
 
-        article a::before { content:"→ "; }
-        h1::before { content:"# "; }
-        h2::before { content:"## "; }
-        h3::before { content:"### "; }
-        blockquote::before { content:"> "; }
+        h1::before {
+            content: "# ";
+        }
+
+        h2::before {
+            content: "## ";
+        }
+
+        h3::before {
+            content: "### ";
+        }
+
+        blockquote::before {
+            content: "> ";
+        }
 
         blockquote {
             margin: 0 1em;
@@ -64,6 +89,6 @@
 
 <body>
 
-<div class="container">
-<article>
-<!-- End header.html -->
+    <div class="container">
+        <article>
+            <!-- End header.html -->
