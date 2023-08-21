@@ -36,7 +36,7 @@ fi
 
 # get the current date for the footer (UTC and ISO 8601 with hours and minutes)
 date=$(date -u --iso-8601=minutes)
-sed "s/GEN_DATE/$date/" html/footer.html > "$tempdir/footer.html"
+sed "s/GEN_DATE/${date}/" html/footer.html > "$tempdir/footer.html"
 
 
 # finding recursively all ".gmi" files on the working path
@@ -45,10 +45,12 @@ do
 
     # deleting the '#' of the first line and save it as title
     title="$(sed -n '1{s/# //p}' "$gmi_file") $2"
+    # escaping eventual '&' (otherwise causing a bug where it is replaced by '<\!-- TITLE -->')
+    title=$(echo "$title" | sed "s#&#\\\&#g")
 
     # in the header.html, replacing the "<\-- TITLE -->" by the previously
     # saved title, and save the modified file in our temporary directory
-    sed "s#<\!-- TITLE -->#$title#" html/header.html > "$tempdir/header.html"
+    sed "s#<\!-- TITLE -->#${title}#" html/header.html > "$tempdir/header.html"
 
     # convertig .gmi files in .html
     /usr/local/bin/gmnitohtml < "$gmi_file" > "$tempdir/body.html"
