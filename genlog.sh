@@ -36,9 +36,23 @@ else
 fi
 
 
+# if header or footer file exists in the substitutes folder, use it instead of the default ones
+if [ -f html/substitutes/header.html ]; then
+    header_template="html/substitutes/header.html"
+else
+    header_template="html/header.html"
+fi
+
+if [ -f html/substitutes/footer.html ]; then
+    footer_template="html/substitutes/footer.html"
+else
+    footer_template="html/footer.html"
+fi
+
+
 # get the current date for the footer (UTC and ISO 8601 with hours and minutes)
 date=$(date -u --iso-8601=minutes)
-sed "s/GEN_DATE/${date}/" html/footer.html > "$tempdir/footer.html"
+sed "s/GEN_DATE/${date}/" "$footer_template" > "$tempdir/footer.html"
 
 
 # finding recursively all ".gmi" files on the working path
@@ -52,7 +66,7 @@ do
 
     # in the header.html, replacing the "<\-- TITLE -->" by the previously
     # saved title, and save the modified file in our temporary directory
-    sed "s#<\!-- TITLE -->#${title}#" html/header.html > "$tempdir/header.html"
+    sed "s#<\!-- TITLE -->#${title}#" "$header_template" > "$tempdir/header.html"
 
     # convertig .gmi files in .html
     /usr/local/bin/gmnitohtml < "$gmi_file" > "$tempdir/body.html"

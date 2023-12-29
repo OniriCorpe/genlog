@@ -37,4 +37,7 @@ or
 you can optionally add a text at the end of the HTML page title as the second argument  
 ```./genlog.sh /path/to/your/choosen/folder "Your custom title"```
 
+you can also put your own `header.html` or `footer.html` in the `html/substitutes` folder  
+so they will be used instead of the default ones and you can freely personalize them
+
 this project uses the [HotChocolateLicence](https://codeberg.org/OniriCorpe/HotChocolateLicence)
