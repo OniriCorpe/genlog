@@ -62,6 +62,7 @@ do
     # deleting the '#' of the first line and save it as title
     title="$(sed -n '1{s/# //p}' "$gmi_file") $2"
     # escaping eventual '&' (otherwise causing a bug where it is replaced by '<\!-- TITLE -->')
+    # shellcheck disable=SC2001
     title=$(echo "$title" | sed "s#&#\\\&#g")
 
     # in the header.html, replacing the "<\-- TITLE -->" by the previously
